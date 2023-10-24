@@ -1,7 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Banner.css";
+import axios from "./axios";
+import request from "./Request";
 
 function Banner() {
+  const [movie, setMovie] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const requests = await axios.get(request.fetchNetflixOriginals);
+      setMovie(
+        requests.data.results[
+          Math.floor(Math.random() * requests.data.results.length - 1)
+        ]
+      );
+      return requests;
+    }
+    fetchData();
+  }, []);
+
+  console.log(movie);
   function truncate(string, n) {
     return string?.length > n ? string.substr(0, n - 1) + "..." : string;
   }
@@ -10,12 +28,12 @@ function Banner() {
       className="banner"
       style={{
         backgroundSize: "cover",
-        backgroundImage: `url(${"https://wallpapers.com/images/high/vantablack-background-1920-x-1080-2jce1nl3275dp7p2.webp"})`,
+        backgroundImage: `url("https://image.tmdb.org/t/p/original/${movie?.backdrop_path}")`,
         backgroundPosition: "center center",
       }}
     >
       <div className="banner_contents">
-        <h1 className="banner_title">Movie Name</h1>
+        <h1 className="banner_title">{movie?.title || movie?.name}</h1>
         <div className="banner_buttons">
           <button className="banner_button">Play</button>
           <button className="banner_button">My List</button>
