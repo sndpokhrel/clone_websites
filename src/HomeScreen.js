@@ -3,6 +3,7 @@ import "./HomeScreen.css";
 import Nav from "./Nav";
 import Banner from "./Banner";
 import request from "./Request";
+import Row from "./Row";
 
 const HomeScreen = () => {
   return (
