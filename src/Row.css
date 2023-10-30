@@ -30,3 +30,8 @@
 .row_posterLarge {
   max-height: 250px;
 }
+
+.row_posterLarge:hover {
+  transform: scale(1.09);
+  opacity: 1;
+}
